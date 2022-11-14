@@ -3,7 +3,8 @@
 
     <template id="report_saleorder_document_inherit_dot_range" inherit_id="sale.report_saleorder_document">
         <xpath expr="//span[@t-field='line.name']" position="after">
-            <t t-if="line.product_id.dot_range"><h6>DOT:    <span t-field="line.dot_range"/></h6></t>
+            <br></br>
+            <t t-if="line.product_id.dot_range"><h10>DOT:    <span t-field="line.dot_range"/></h10></t>
         </xpath>
     </template>
 
