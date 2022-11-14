@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <template id="report_saleorder_document_inherit_dot_range" inherit_id="sale.report_saleorder_document">
+    <template id="report_saleorder_document_inherit_dot_range" inherit_id="sale.report_saleorder_document">        
         <xpath expr="//span[@t-field='line.name']" position="after">
-            <br></br>
-            <t t-if="line.product_id.dot_range"><h10>DOT:    <span t-field="line.dot_range"/></h10></t>
+            <br/>
+            <t t-if="line.product_id.dot_range">DOT: <span t-field="line.dot_range"/></t>
         </xpath>
     </template>
 
