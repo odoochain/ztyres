@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "ztyres",
+    'name': "Ztyres",
 
     'summary': """
         Personalizaciones y modificaciones realizadas a Odoo Enterprise 14.0 para la empresa ZTYRES.""",
@@ -11,9 +11,9 @@ Guía de modificaciones.
 
 Se describe de manera breve la funcionalidad, modificación, permiso ó característica instalada.
 
-Contactos:
-----------------------------
     Características:
+-------------------------------------------------------------------------------
+
     * Rango de DOT agregado en órdenes y cotizaciones de venta.
 
     * Combinación de dos o más cotizaciones de venta.
@@ -29,9 +29,20 @@ Contactos:
     # for the full list
     'category': 'Customizations',
     'version': '14.0.0.0',
-
+    'external_dependencies': {
+        'python': [
+            
+        ],
+    },
     # any module necessary for this one to work correctly
     'depends': ['stock','contacts','base','sale','account','l10n_mx_edi'],
+    'application': True,
+    'installable': True,
+    'auto_install': False,
+    'price': 4000.00,
+    'currency': 'USD',
+    'license': 'LGPL-3',
+    'sequence': 1,
 
     # always loaded
     'data': [
