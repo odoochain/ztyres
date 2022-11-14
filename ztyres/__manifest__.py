@@ -6,13 +6,13 @@
         Personalizaciones y modificaciones realizadas a Odoo Enterprise 14.0 para la empresa ZTYRES.""",
 
     'description': """
-Guía de modificaciones.
-==========================================================================
-
-Se describe de manera breve la funcionalidad, modificación, permiso ó característica instalada.
-
-    Características:
--------------------------------------------------------------------------------
+    Guía de modificaciones.
+    ==========================================================================
+    
+    Se describe de manera breve la funcionalidad, modificación, permiso ó característica instalada.
+    
+        Características:
+    --------------------------------------------------------------------------
 
     * Rango de DOT agregado en órdenes y cotizaciones de venta.
 
