@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <record id="ztyres.wizard_denied_confirm_sale_form" model="ir.ui.view">
+            <field name="name">ztyres.wizard_denied_confirm_sale.form</field>
+            <field name="model">ztyres.wizard_denied_confirm_sale</field>
+            <field name="arch" type="xml">
+                <form string="Aviso">
+                    <sheet>
+                        <!-- Error Alert -->
+                        <div class="alert alert-danger mb-0" role="alert">
+                            <i class="bi-exclamation-octagon-fill"></i>
+                            <strong class="mx-2">Error!</strong> El cliente no tiene el suficiente límite de cŕedito.
+                            <button name="close" type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    </sheet>
+                    <footer>
+                        <button name="close" string="Ver detalles" type="button" class="oe_highlight"/>                    
+                        <button string="Cancel" special="cancel" class="oe_link"/>                        
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

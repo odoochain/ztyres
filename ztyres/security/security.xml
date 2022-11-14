@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <record model="ir.module.category" id="account_changes">
+            <field name="name">Accesos ZTYRES</field>
+            <field name="description">Permisos personalizados.</field>
+            <field name="sequence">10</field>
+        </record>
+
+        <!-- <record id="payment_term" model="res.groups">
+            <field name="name">Modificación de Forma de Pago y Política de Pago en facturas</field>
+            <field name="category_id" ref="account_changes" />
+        </record>
+        <record id="partner_id_vat" model="res.groups">
+            <field name="name">Modificación de RFC y Empresa relacionada de Contactos</field>
+            <field name="category_id" ref="account_changes" />
+        </record> -->
+        <record id="merge_sale" model="res.groups">
+            <field name="name">Combinar Cotizaciones de Venta</field>
+            <field name="category_id" ref="account_changes" />
+        </record>
+    </data>
+</odoo>
