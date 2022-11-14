@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo import models, fields, api,_
 
-
-
 class AccountMove(models.Model):
     _inherit = 'account.move'
     partner_credit_limit_used = fields.Monetary(related='partner_id.credt_limit_used', readonly=True)
@@ -15,9 +13,6 @@ class AccountMove(models.Model):
     def _compute_show_partner_credit_alert(self):
         for order in self:
             order.show_partner_credit_alert = True
-
-    # def _ztyres_get_sale_types(self):
-    #     return ['out_invoice', 'out_refund']
 
     l10n_mx_edi_payment_policy = fields.Selection(string='Payment Policy',
         selection=[('PPD', 'PPD'), ('PUE', 'PUE')],

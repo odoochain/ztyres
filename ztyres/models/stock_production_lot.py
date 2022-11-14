@@ -2,8 +2,6 @@
 from odoo.exceptions import UserError
 from odoo import models, fields, api,_
 
-
-
 class StockProductionLot(models.Model):
     _inherit = 'stock.production.lot'
     week = fields.Many2one('stock.production.lot.week', string='Semana')

@@ -13,19 +13,12 @@ Se describe de manera breve la funcionalidad, modificación, permiso ó caracter
 
 Contactos:
 ----------------------------
-    Permisos:
-    1. Modificación de RFC y Empresa relacionada de Contactos.
+    Características:
+    * Rango de DOT agregado en órdenes y cotizaciones de venta.
 
-    2. Modificación de Forma de Pago y Política de Pago en facturas.
+    * Combinación de dos o más cotizaciones de venta.
 
-    3. The last one is available from the Analytic Chart of Accounts. It gives
-       the spreading, for the selected Analytic Accounts of Budgets.
-
-    Make the lock date irreversible:
-
-    * You cannot define stricter conditions on advisors than on users. Then, the lock date on advisor must be set before the lock date for users.
-    * You cannot lock a period that is not finished yet. Then, the lock date for advisors must be set before the last day of the previous month.
-    * The new lock date for advisors must be set after the previous lock date.
+    * Listado de llantas con stock disponible en los documentos de órdenes y cotizaciones de venta.
     """,
 
     'author': "José Roberto Mejía Pacheco",

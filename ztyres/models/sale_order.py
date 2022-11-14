@@ -2,7 +2,6 @@
 from odoo import models, fields, api,_
 
 class SaleOrder(models.Model):
-
     _inherit = 'sale.order'
     partner_credit_limit_used = fields.Monetary(related='partner_id.credt_limit_used', readonly=True)
     partner_credit_limit_available = fields.Monetary(related='partner_id.credt_limit_available', readonly=True)    

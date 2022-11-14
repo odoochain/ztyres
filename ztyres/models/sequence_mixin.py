@@ -1,11 +1,6 @@
 # -*- coding: utf-8 -*-
 #/usr/lib/python3/dist-packages/odoo/addons/account/models/sequence_mixin.py
-from odoo import api, fields, models, _
-from odoo.exceptions import ValidationError
-from odoo.tools.misc import format_date
-
-import re
-from psycopg2 import sql
+from odoo import models, _
 
 
 class SequenceMixin(models.AbstractModel):

@@ -2,10 +2,6 @@
 from odoo import models, fields
 from odoo.tools import  float_compare
 
-
-
-
-
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'    
 
