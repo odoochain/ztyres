@@ -4,24 +4,14 @@
 
     'summary': """
         Personalizaciones y modificaciones realizadas a Odoo Enterprise 14.0 para la empresa ZTYRES.""",
+    'description': """Guía de modificaciones
 
-    'description': """
-    Guía de modificaciones.
-    ==========================================================================
-    
-    Se describe de manera breve la funcionalidad, modificación, permiso ó característica instalada.
-    
-        Características:
-    --------------------------------------------------------------------------
-
-    * Rango de DOT agregado en órdenes y cotizaciones de venta.
-
-    * Combinación de dos o más cotizaciones de venta.
-
-    * Listado de llantas con stock disponible en los documentos de órdenes y cotizaciones de venta.
-    """,
-
+Se describe de manera breve la funcionalidad, modificación, permiso ó característica instalada.
+* Rango de DOT agregado en órdenes y cotizaciones de venta.
+* Combinación de dos o más cotizaciones de venta.
+* Listado de llantas con stock disponible en los documentos de órdenes y cotizaciones de venta.""",
     'author': "José Roberto Mejía Pacheco",
+    'maintainer': 'José Roberto Mejía Pacheco',
     'website': "https://mx.linkedin.com/in/jrmpacheco",
 
     # Categories can be used to filter modules in modules listing
