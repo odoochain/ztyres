@@ -26,7 +26,7 @@ Se describe de manera breve la funcionalidad, modificación, permiso ó caracter
     },
     # any module necessary for this one to work correctly
     'depends': ['stock','contacts','base','sale','account','l10n_mx_edi'],
-    'application': True,
+    'application': False,
     'installable': True,
     'auto_install': False,
     'price': 4000.00,
