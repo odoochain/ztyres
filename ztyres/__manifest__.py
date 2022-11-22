@@ -26,7 +26,7 @@
         ],
     },
     # any module necessary for this one to work correctly
-    'depends': ['stock','contacts','base','sale','account','l10n_mx_edi'],
+    'depends': ['mail','stock','product','contacts','base','sale','sale_management','account','l10n_mx_edi'],
     'application': False,
     'installable': True,
     'auto_install': False,
@@ -41,15 +41,22 @@
         'data/stock.production.lot.year.csv',
         'security/security.xml',
         'security/ir.model.access.csv',
-        # 'views/account_move.xml',
+        'views/account_move.xml',
         'views/account_views.xml',
-        # 'views/res_partner_views.xml',
+        'views/res_partner_views.xml',
         'views/sale_order_report.xml',
         'views/sale_views.xml',
         'views/stock_production_lot_views.xml',
         'wizard/denied_confirm_sale.xml',
         'wizard/merge_quotations.xml',
-        # 'views/stock_picking_views.xml'
+        'views/stock_picking_views.xml',
+        'views/ztyres_sale_promotion_views.xml',
+        'views/product_template_form_view.xml',
+        'wizard/update_pricelist.xml',
+        'views/update_pricelist_button_template.xml',
+        'wizard/sale_order_cancel_reason.xml',
+        'wizard/update_pricelist_import.xml',
+        'wizard/update_pricelist_confirm_import.xml'
     ],
     # only loaded in demonstration mode
     'demo': [

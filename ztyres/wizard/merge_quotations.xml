@@ -6,7 +6,7 @@
             <field name="name">Combinar Cotizaciones</field>
             <field name="model_id" ref="model_ztyres_wizard_merge_quotations" />
             <field name="binding_model_id" ref="sale.model_sale_order" />
-            <field name="groups_id" eval="[(6, 0, [ref('ztyres.merge_sale') ])]" /> 
+            <field name="groups_id" eval="[(6, 0, [ref('ztyres.group_merge_sale') ])]" /> 
             <field name="state">code</field>
             <field name="binding_view_types">list</field>
             <!-- <field name="groups_id" eval="[(4, ref('sale_approve.manager_access'))]"/> -->
@@ -23,6 +23,27 @@
             </field>
         </record>
 
+        <record id="merge_quotations_action_to_sale" model="ir.actions.server">
+            <field name="name">Combinar Cotizaciones y convertir a orden de Venta</field>
+            <field name="model_id" ref="model_ztyres_wizard_merge_quotations" />
+            <field name="binding_model_id" ref="sale.model_sale_order" />
+            <field name="groups_id" eval="[(6, 0, [ref('ztyres.group_merge_sale') ])]" /> 
+            <field name="state">code</field>
+            <field name="binding_view_types">list</field>
+            <!-- <field name="groups_id" eval="[(4, ref('sale_approve.manager_access'))]"/> -->
+            <field name="code">
+                action = {
+                    'name': 'Combinar Cotizaciones y convertir a orden de Venta',
+                    'type': 'ir.actions.act_window',
+                    'view_type': 'form',
+                    'view_mode': 'form',
+                    'view_id': env.ref('ztyres.wizard_form_merge_quotations_to_sale').id,
+                    'res_model': 'ztyres.wizard_merge_quotations',
+                    'target': 'new',
+                    'context' : {'sale_ids':env.context}
+                }
+            </field>
+        </record>
 
         <record id="wizard_form_merge_quotations" model="ir.ui.view">
             <field name="name">Combinar Cotizaciones</field>
@@ -41,6 +62,22 @@
             </field>
         </record>
 
+        <record id="wizard_form_merge_quotations_to_sale" model="ir.ui.view">
+            <field name="name">Combinar Cotizaciones</field>
+            <field name="model">ztyres.wizard_merge_quotations</field>
+            <field name="arch" type="xml">
+                <form string="Combinar Cotizaciones" version="7.0">
+                    <h2>Las cotizaciones existentes se eliminarán y se creará una órden de venta con los productos y cantidades solicitadas.</h2>
+                    <strong>                    
+                        <h3>Esta operación no se podrá deshacer. ¿Desea continuar?</h3>
+                    </strong>
+                    <footer>
+                        <button name="merge_quotations_to_sale" string="Si" type="object" class="oe_highlight" />                        
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
         
     </data>
 </odoo>

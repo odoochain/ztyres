@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
 from odoo.exceptions import UserError
 from odoo import models,fields
+
 class StockPicking(models.Model):
-    _inherit = 'stock.picking'
-    
+    _inherit = ['stock.picking']
+    # _inherit = 'mail.thread'
+    # _inherit = 'mail.activity.mixin'
     separation_status = fields.Selection(
         string='Estado de Separación',
-        selection=[('draft', 'Por Separar'), ('done', 'Separado')],default='draft'
+        selection=[('draft', 'Por Separar'), ('done', 'Separado')],default='draft',
+        tracking=True
+        
     )
 
 

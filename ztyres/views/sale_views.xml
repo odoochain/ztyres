@@ -7,14 +7,22 @@
                 <field name="model">sale.order</field>
                 <field name="inherit_id" ref="sale.view_order_form" />
                 <field name="arch" type="xml">
+                    <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='price_subtotal']" position="before">
+                        <field name="promotion_applied" widget="many2many_tags" readonly="1" />
+                        <field name="amount_discount" />
+                        <field name="price_with_discount" />
+                    </xpath>
                     <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='product_id']" position="after">
                         <field name="dot_range" />
                     </xpath>
+                    <field name='payment_term_id' position='after'>
+                        <field name='month_promotion' />
+                    </field>
                 </field>
             </record>
         </data>
-        
-        <!-- <record id="view_order_form_inherit_ztyres" model="ir.ui.view">
+
+        <record id="view_order_form_inherit_ztyres" model="ir.ui.view">
             <field name="name">sale.order.form</field>
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form" />
@@ -45,7 +53,7 @@
                     </div>
                 </xpath>
             </field>
-        </record> -->
-                
+        </record>
+
     </data>
 </odoo>

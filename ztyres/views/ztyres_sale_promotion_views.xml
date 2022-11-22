@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <record id="sale_promotion_view_tree" model="ir.ui.view">
+            <field name="name">Promociones ZTYRES</field>
+            <field name="model">ztyres.sale_promotion</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="name" />
+                    <field name="start_date" />
+                    <field name="end_date" />
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="sale_promotion_form" model="ir.ui.view">
+            <field name="name">Promociones ZTYRES</field>
+            <field name="model">ztyres.sale_promotion</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <header></header>
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                            <field name="start_date" />
+                            <field name="end_date" />
+                        </group>
+                        <p>Descripción de uso</p>
+                        <field name="sale_promotion_lines">
+                            <tree create="true" delete="true" edit="true" editable="bottom">
+                                <field name="manufacturer_ids" widget="many2many_tags" />
+                                <field name="product_tier_ids" widget="many2many_tags" />
+                                <field name="product_usage_ids" widget="many2many_tags" />
+                                <field name="discunt" widget="percentage"/>
+                                <field name="qty" />                                
+                            </tree>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="sale_promotion_action" model="ir.actions.act_window">
+            <field name="name">Promociones ZTYRES</field>
+            <field name="res_model">ztyres.sale_promotion</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+            id="promotion_root_menu"
+            name="Promociones"
+            sequence="0"
+            groups="group_sale_promotion"
+        />
+
+        <menuitem
+            id="promotion_menu"
+            name="Promociones"
+            action="sale_promotion_action"
+            groups="group_sale_promotion"
+            parent="promotion_root_menu"
+            sequence="2" />
+
+    </data>
+</odoo>

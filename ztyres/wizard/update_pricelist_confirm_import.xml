@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <record id="view_pricelist_import_confirm_wizard_xls_form" model="ir.ui.view">
+            <field name="name">ztyres.update_pricelist_import.form</field>
+            <field name="model">ztyres.update_pricelist_confirm_import</field>
+            <field name="arch" type="xml">
+                <form string="Import Dias XLS">
+                	<group>
+                		<h4>¿Esta seguro?</h4>
+                	</group>
+                	<footer>
+                        <button name="action_done" string="Aceptar" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="oe_highlight" special="cancel" />
+                    </footer>
+               </form>
+            </field>
+        </record>
+    </data>
+</odoo>
