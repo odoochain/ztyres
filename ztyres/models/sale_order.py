@@ -49,7 +49,7 @@ class SaleOrder(models.Model):
     @api.model
     def create(self, values):        
         currentMonth = str(datetime.now().month).zfill(2)
-        values.update({'month_promotion':currentMonth})
+        # values.update({'month_promotion':currentMonth})
         print(values)
         result = super().create(values)
         result.order_line.check_price_not_in_zero()
