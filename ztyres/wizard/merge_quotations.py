@@ -102,8 +102,9 @@ class MergeQuotations(models.TransientModel):
         new_sale.order_line = grouped_vals_arr        
         sales.order_line.sudo().unlink()
         sales.sudo().unlink()         
-        new_sale.action_confirm()   
-        return {
+        res = new_sale.action_confirm()  
+        print(res) 
+        return res or {
             'type': 'ir.actions.act_window',
             'name': 'Cotizacion',
             'res_model': 'sale.order',

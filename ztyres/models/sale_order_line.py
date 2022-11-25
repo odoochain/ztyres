@@ -16,7 +16,7 @@ class SaleOrderLine(models.Model):
     def check_price_not_in_zero(self):
         for record in self:
             if record.price_unit == 0 or record.price_unit < 1:
-                raise UserError('No puede continuar con productos con precio $0   %s'%(record.name))
+                raise UserError('No puede continuar con productos con precio $0   %s documento origen %s'%(record.name,record.order_id.name))
 
     # @api.depends('product_id','product_uom_qty','order_id.month_promotion')
     # def check_ztyres_sale_promotion(self):

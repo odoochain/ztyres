@@ -57,11 +57,6 @@
             <field name="category_id" ref="sale_approve_management" />
         </record>
 
-        <record id="credit_and_collection_approves" model="res.groups">
-            <field name="name">Aprobación de Crédito y Cobranza</field>
-            <field name="category_id" ref="sale_approve_management" />
-        </record>
-
         <record id="advance_payments_approved" model="res.groups">
             <field name="name">Aprobación de Pagos Anticipados</field>
             <field name="category_id" ref="sale_approve_management" />

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from odoo import models, fields, api,_
 from datetime import datetime
-
+from odoo.exceptions import UserError
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
     partner_credit_limit_used = fields.Monetary(related='partner_id.credt_limit_used', readonly=True)
@@ -12,21 +12,20 @@ class SaleOrder(models.Model):
     #month_promotion = fields.Selection([('01','Enero'),('02','Febrero'),('03','Marzo'),('04','Abril'),('05','Mayo'),('06','Junio'),('07','Julio'),('08','Agosto'),('09','Septiembre'),('10','Octubre'),('11', 'Noviembre'),('12','Diciembre')], string='Mes para promoción')
     sale_reason_cancel_id = fields.Many2many(comodel_name='ztyres.sale_reason_cancel', string='Motivo de Cancelación')
     payment_term_days = fields.Integer(compute='_compute_payment_term_days',string='Días de Crédito')
-    APPROVE_STATES = [('draft', 'Gerente de Ventas'),('done', 'Crédito y Cobranza'),('confirm', 'Anticipado')]
+    APPROVE_STATES = [('draft', 'Gerente de Ventas'),('confirm', 'Pago Anticipado')]
     approve_state = fields.Selection(string='Estado de Aprobación', selection=APPROVE_STATES,track_visibility='onchange')    
 
+    
     def sale_approve_state_draft(self):
         for record in self:
             record.approve_state = 'draft'
 
-    def sale_approve_state_done(self):
-        for record in self:
-            record.approve_state = 'done'
 
 
     def sale_approve_state_confirm(self):
         for record in self:
             record.approve_state = 'confirm'
+            record.action_confirm()
 
 
     def _compute_payment_term_days(self):
@@ -76,6 +75,10 @@ class SaleOrder(models.Model):
             res = order._ztyres_check_account_status()       
         return res or super(SaleOrder, self).action_confirm()
 
+    def action_draft(self):
+        for order in self:            
+            order.quotation_action_confirm()       
+        return super(SaleOrder, self).action_draft()    
 
     def quotation_action_confirm(self):     
         # Validate sale policies again
@@ -98,17 +101,27 @@ class SaleOrder(models.Model):
         return (unpaid_invoices,balance_for_followup)
     
     def _ztyres_check_account_status(self):
-        for order in self:            
-            if not (order.amount_total <= order.partner_credit_limit_available and 0.0 <=order.partner_credit_amount_overdue):
+        for order in self:
+            if order.partner_credit_amount_overdue <=0.0:
+                print('pasa')         
+            if order.amount_total <= order.partner_credit_limit_available:
+                print('pasa')                    
+
+            if order.partner_credit_amount_overdue <= 0.0 and self.approve_state not in ['confirm'] and self.payment_term_days == 0.0:
+                if self.approve_state in [False]:
+                    raise UserError('Nececita la aprobación del Gerente de Ventas.')  
+                else:    
+                    raise UserError('Nececita indicar que el pago anticipado fue realizado para compras de contado.')  
+            if self.approve_state in ['confirm'] and self.payment_term_days == 0.0:
+                return False
+            if not (order.amount_total <= order.partner_credit_limit_available and order.partner_credit_amount_overdue  <= 0.0 ):
                 return {
                     'type': 'ir.actions.act_window',
                     'name': 'Error en la Validación',
                     'res_model': 'ztyres.wizard_denied_confirm_sale',
                     'view_mode': 'form',                    
                     'target': 'new'
-                } 
-            elif  order.partner_credit_amount_overdue == 0.0 and self.approve_state == 'confirm' and self.payment_term_days == 0.0:
-                return False    
+                }                                           
             else:
                 return False 
 
