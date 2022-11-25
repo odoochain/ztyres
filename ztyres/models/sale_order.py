@@ -24,8 +24,7 @@ class SaleOrder(models.Model):
 
     def sale_approve_state_confirm(self):
         for record in self:
-            record.approve_state = 'confirm'
-            record.action_confirm()
+            record.approve_state = 'confirm'            
 
 
     def _compute_payment_term_days(self):
