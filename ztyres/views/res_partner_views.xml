@@ -10,7 +10,8 @@
             <field name="arch" type="xml">
                 <field name='vat' position='attributes'>
                     <attribute name="attrs">{}</attribute>
-                    <attribute name="readonly">True</attribute>                    
+                    <attribute name="readonly">True</attribute>   
+                    <attribute name="required">False</attribute>                 
                 </field>
                 <field name='parent_id' position='attributes'>
                     <attribute name="attrs">{"readonly": True,"invisible":False}</attribute>
