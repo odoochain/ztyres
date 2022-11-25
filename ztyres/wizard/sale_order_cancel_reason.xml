@@ -8,7 +8,7 @@
                 <form string="Motivo de Cancelación">
                     <sheet>
                         <group>
-                            <field name="cancel_reason"/>
+                            <field name="cancel_reason" widget="many2many_tags"/>
                         </group>
                     </sheet>
                     <footer>

@@ -10,6 +10,8 @@ class ResPartner(models.Model):
     credt_limit_used = fields.Monetary(compute='_compute_credt_limit_used', string='Crédito Usado')
     credt_limit_available = fields.Monetary(compute='_compute_credt_limit_available', string='Crédito Disponible')
     credit_amount_overdue = fields.Monetary(compute='_compute_credt_limit_available', string='Saldo Vencido')
+    credit_limit = fields.Float(string='Límite de Crédito',tracking=True)
+    
 
     def _compute_credt_limit_used(self):
         for partner in self:
@@ -20,6 +22,7 @@ class ResPartner(models.Model):
     def _compute_credt_limit_available(self):
         for partner in self:
             partner.credt_limit_available = partner.credit_limit-partner.credt_limit_used if partner.credit_limit-partner.credt_limit_used>1 else 0
+            print(partner.credt_limit_available)
     
     def _ztyres_compute_for_followup(self):
         """

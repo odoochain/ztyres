@@ -6,12 +6,20 @@ class StockPicking(models.Model):
     _inherit = ['stock.picking']
     # _inherit = 'mail.thread'
     # _inherit = 'mail.activity.mixin'
-    separation_status = fields.Selection(
-        string='Estado de Separación',
-        selection=[('draft', 'Por Separar'), ('done', 'Separado')],default='draft',
-        tracking=True
+    # separation_status = fields.Selection(
+    #     string='Estado de Separación',
+    #     selection=[('draft', 'Por Separar'), ('done', 'Separado')],default='draft',
+    #     tracking=True
         
-    )
+    # )
+    state_sale_id = fields.Selection([
+        ('draft', 'Draft'),
+        ('waiting', 'Waiting Another Operation'),
+        ('confirmed', 'Waiting'),
+        ('assigned', 'Ready'),
+        ('done', 'Done'),
+        ('cancel', 'Cancelled'),
+    ],related='sale_id.state',string='Estado de documento origen')
 
 
 

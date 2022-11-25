@@ -50,13 +50,13 @@
         'wizard/denied_confirm_sale.xml',
         'wizard/merge_quotations.xml',
         'views/stock_picking_views.xml',
-        'views/ztyres_sale_promotion_views.xml',
-        'views/product_template_form_view.xml',
-        'wizard/update_pricelist.xml',
-        'views/update_pricelist_button_template.xml',
+        # 'views/ztyres_sale_promotion_views.xml',
+        # 'views/product_template_form_view.xml',
+        # 'wizard/update_pricelist.xml',
+        # 'views/update_pricelist_button_template.xml',
         'wizard/sale_order_cancel_reason.xml',
-        'wizard/update_pricelist_import.xml',
-        'wizard/update_pricelist_confirm_import.xml'
+        # 'wizard/update_pricelist_import.xml',
+        # 'wizard/update_pricelist_confirm_import.xml'
     ],
     # only loaded in demonstration mode
     'demo': [

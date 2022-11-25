@@ -6,9 +6,9 @@ class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'    
 
     dot_range = fields.Char(related='product_id.dot_range')
-    amount_discount = fields.Float(compute='check_ztyres_sale_promotion',string='Ahorro',store=True)
-    price_with_discount = fields.Float(compute='check_ztyres_sale_promotion',string='Precio con descuento',store=True)    
-    promotion_applied = fields.Many2many('ztyres.sale_promotion_line', string='Promoción aplicada')
+    # amount_discount = fields.Float(compute='check_ztyres_sale_promotion',string='Ahorro',store=True)
+    # price_with_discount = fields.Float(compute='check_ztyres_sale_promotion',string='Precio con descuento',store=True)    
+    # promotion_applied = fields.Many2many('ztyres.sale_promotion_line', string='Promoción aplicada')
     
     
 
@@ -18,33 +18,33 @@ class SaleOrderLine(models.Model):
             if record.price_unit == 0 or record.price_unit < 1:
                 raise UserError('No puede continuar con productos con precio $0   %s'%(record.name))
 
-    @api.depends('product_id','product_uom_qty','order_id.month_promotion')
-    def check_ztyres_sale_promotion(self):
-        promotion = self.env['ztyres.sale_promotion'].search([])
-        for record in self:
-            for promo in promotion:
-                for rec in  promo.sale_promotion_lines:
-                    discount_amount = (rec.discunt*record.price_unit) * record.product_uom_qty
-                    discounted_price = ((record.price_unit * record.product_uom_qty)-discount_amount) 
-                    if  record.product_id.manufacturer_id.id in rec.manufacturer_ids.ids and record.product_uom_qty >= rec.qty:
-                        record.amount_discount = discount_amount
-                        record.price_with_discount = discounted_price
-                        record.promotion_applied = [(4,rec.id)]
-                        break
-                    elif record.product_id.product_tier_id.id in rec.product_tier_ids.ids and record.product_uom_qty >= rec.qty:
-                        record.amount_discount = discount_amount
-                        record.price_with_discount = discounted_price
-                        record.promotion_applied = [(4,rec.id)]
-                        break
-                    elif record.product_id.product_usage_id.id in rec.product_usage_ids.ids and record.product_uom_qty >= rec.qty:
-                        record.amount_discount = discount_amount
-                        record.price_with_discount = discounted_price
-                        record.promotion_applied = [(4,rec.id)]
-                        break
-                    else:                        
-                        record.amount_discount = 0
-                        record.price_with_discount = 0                        
-                        record.promotion_applied = False
+    # @api.depends('product_id','product_uom_qty','order_id.month_promotion')
+    # def check_ztyres_sale_promotion(self):
+    #     promotion = self.env['ztyres.sale_promotion'].search([])
+    #     for record in self:
+    #         for promo in promotion:
+    #             for rec in  promo.sale_promotion_lines:
+    #                 discount_amount = (rec.discunt*record.price_unit) * record.product_uom_qty
+    #                 discounted_price = ((record.price_unit * record.product_uom_qty)-discount_amount) 
+    #                 if  record.product_id.manufacturer_id.id in rec.manufacturer_ids.ids and record.product_uom_qty >= rec.qty:
+    #                     record.amount_discount = discount_amount
+    #                     record.price_with_discount = discounted_price
+    #                     record.promotion_applied = [(4,rec.id)]
+    #                     break
+    #                 elif record.product_id.product_tier_id.id in rec.product_tier_ids.ids and record.product_uom_qty >= rec.qty:
+    #                     record.amount_discount = discount_amount
+    #                     record.price_with_discount = discounted_price
+    #                     record.promotion_applied = [(4,rec.id)]
+    #                     break
+    #                 elif record.product_id.product_usage_id.id in rec.product_usage_ids.ids and record.product_uom_qty >= rec.qty:
+    #                     record.amount_discount = discount_amount
+    #                     record.price_with_discount = discounted_price
+    #                     record.promotion_applied = [(4,rec.id)]
+    #                     break
+    #                 else:                        
+    #                     record.amount_discount = 0
+    #                     record.price_with_discount = 0                        
+    #                     record.promotion_applied = False
 
 
 

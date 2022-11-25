@@ -9,10 +9,10 @@
             <xpath expr="//sheet" position="before">
                 <field name="show_partner_credit_alert" invisible="1"/>
                 <div groups="account.group_account_invoice,account.group_account_readonly"
-                     class="alert alert-danger mb-0" role="alert"
+                     class="alert alert-info mb-0" role="alert"
                      attrs="{'invisible': ['|', '|', ('state', '!=', 'draft'), ('move_type', '!=', 'out_invoice'), ('show_partner_credit_alert', '=', False)]}">
-                    Este cliente ha alcanzado su límite de crédito de : <b></b>                        
-                    Crédito usado : <b><field name="partner_credit_limit_used"/></b>.
+                    I<b>nformación de crédito :</b>                        
+                    <!-- Crédito usado : <b><field name="partner_credit_limit_used"/></b>. -->
                     Crédito disponible : <b><field name="partner_credit_limit_available"/></b>.
                     Límite de Crédito : <b><field name="partner_credit_limit"/></b>.
                     Saldo Vencido : <b><field name="partner_credit_amount_overdue"/></b>.
