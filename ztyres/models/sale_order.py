@@ -113,7 +113,7 @@ class SaleOrder(models.Model):
                     raise UserError('Nececita indicar que el pago anticipado fue realizado para compras de contado.')  
             if self.approve_state in ['confirm'] and self.payment_term_days == 0.0:
                 return False
-            if not (order.amount_total <= order.partner_credit_limit_available and order.partner_credit_amount_overdue  <= 0.0 ):
+            if not (order.partner_credit_amount_overdue  <= 0.0 ):
                 return {
                     'type': 'ir.actions.act_window',
                     'name': 'Error en la Validación',
