@@ -35,6 +35,7 @@
             <field name="groups_id" eval="[(6, 0, [ref('ztyres.partner_id_vat') ])]" />
             <field name="arch" type="xml">
                 <field name='vat' position='attributes'>
+                    <attribute name="attrs">{}</attribute>
                     <attribute name="readonly">False</attribute>
                     <attribute name="required">False</attribute>
                 </field>
