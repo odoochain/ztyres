@@ -12,7 +12,7 @@
                      class="alert alert-info mb-0" role="alert"
                      attrs="{'invisible': ['|', '|', ('state', '!=', 'draft'), ('move_type', '!=', 'out_invoice'), ('show_partner_credit_alert', '=', False)]}">
                     I<b>nformación de crédito :</b>                        
-                    <!-- Crédito usado : <b><field name="partner_credit_limit_used"/></b>. -->
+                    Crédito usado : <b><field name="partner_credit_limit_used"/></b>.
                     Crédito disponible : <b><field name="partner_credit_limit_available"/></b>.
                     Límite de Crédito : <b><field name="partner_credit_limit"/></b>.
                     Saldo Vencido : <b><field name="partner_credit_amount_overdue"/></b>.

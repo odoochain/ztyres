@@ -21,7 +21,7 @@ class ResPartner(models.Model):
 
     def _compute_credt_limit_available(self):
         for partner in self:
-            partner.credt_limit_available = partner.credit_limit-partner.credt_limit_used if partner.credit_limit-partner.credt_limit_used>1 else 0
+            partner.credt_limit_available = (partner.credit_limit-partner.credt_limit_used) if (partner.credit_limit-partner.credt_limit_used)>=1 else 0
             print(partner.credt_limit_available)
     
     def _ztyres_compute_for_followup(self):

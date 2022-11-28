@@ -19,10 +19,17 @@ class StockPicking(models.Model):
         ('assigned', 'Ready'),
         ('done', 'Done'),
         ('cancel', 'Cancelled'),
-    ],related='sale_id.state',string='Estado de documento origen')
+    ],related='sale_id.state',string='Estado de documento origen',store=True)
 
 
+    
 
+    def action_cancel(self):
+        if self.state_sale_id:
+            self.state_sale_id = 'cancel'
+        result = super(StockPicking, self).action_cancel()
+        return result
+    
     def separation_status_done(self):
         for rec in self:
             rec.separation_status='done'

@@ -62,9 +62,9 @@ class SaleOrder(models.Model):
                 self.action_unlock()
             if self.state == 'draft':
                 self.quotation_action_confirm()
-                res = self._ztyres_check_account_status()
-                if res:                
-                    return res                          
+                ##res = self._ztyres_check_account_status()
+                ##if res:                
+                ##    return res                          
             if self.state == 'sale':
                 self.action_done()                  
         return res
@@ -103,8 +103,7 @@ class SaleOrder(models.Model):
         for order in self:
             if order.partner_credit_amount_overdue <=0.0:
                 print('pasa')         
-            if order.amount_total <= order.partner_credit_limit_available:
-                print('pasa')                    
+              
 
             if order.partner_credit_amount_overdue <= 0.0 and self.approve_state not in ['confirm'] and self.payment_term_days == 0.0:
                 if self.approve_state in [False]:
@@ -116,12 +115,36 @@ class SaleOrder(models.Model):
             if not (order.partner_credit_amount_overdue  <= 0.0 ):
                 return {
                     'type': 'ir.actions.act_window',
-                    'name': 'Error en la Validación',
+                    'name': 'Presenta saldo vencido.',
                     'res_model': 'ztyres.wizard_denied_confirm_sale',
                     'view_mode': 'form',                    
                     'target': 'new'
                 }                                           
             else:
+                if order.partner_credit_limit_used > order.partner_credit_limit:
+                    return {
+                    'type': 'ir.actions.act_window',
+                    'name': 'La cantidad de crédito usado es mayor a la cantidad de límite de crédito',
+                    'res_model': 'ztyres.wizard_denied_confirm_sale',
+                    'view_mode': 'form',                    
+                    'target': 'new'
+                }  
+                if order.partner_credit_limit_used > order.partner_credit_limit:
+                    return {
+                    'type': 'ir.actions.act_window',
+                    'name': 'La cantidad de crédito usado es mayor a la cantidad de límite de crédito',
+                    'res_model': 'ztyres.wizard_denied_confirm_sale',
+                    'view_mode': 'form',                    
+                    'target': 'new'
+                }
+                if order.amount_total >= order.partner_credit_limit_available:
+                    return {
+                        'type': 'ir.actions.act_window',
+                        'name': 'La el total de la factura supera el límite de crédito disponible.',
+                        'res_model': 'ztyres.wizard_denied_confirm_sale',
+                        'view_mode': 'form',                    
+                        'target': 'new'
+                    }                                                      
                 return False 
 
     # def update_prices(self):
