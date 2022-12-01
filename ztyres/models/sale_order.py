@@ -12,8 +12,8 @@ class SaleOrder(models.Model):
     #month_promotion = fields.Selection([('01','Enero'),('02','Febrero'),('03','Marzo'),('04','Abril'),('05','Mayo'),('06','Junio'),('07','Julio'),('08','Agosto'),('09','Septiembre'),('10','Octubre'),('11', 'Noviembre'),('12','Diciembre')], string='Mes para promoción')
     sale_reason_cancel_id = fields.Many2many(comodel_name='ztyres.sale_reason_cancel', string='Motivo de Cancelación')
     payment_term_days = fields.Integer(compute='_compute_payment_term_days',string='Días de Crédito')
-    APPROVE_STATES = [('draft', 'Gerente de Ventas'),('confirm', 'Pago Anticipado')]
-    approve_state = fields.Selection(string='Estado de Aprobación', selection=APPROVE_STATES,track_visibility='onchange')    
+    #APPROVE_STATES = [('draft', 'Gerente de Ventas'),('confirm', 'Pago Anticipado')]
+    #approve_state = fields.Selection(string='Estado de Aprobación', selection=APPROVE_STATES,track_visibility='onchange')    
 
     
     def sale_approve_state_draft(self):
@@ -46,10 +46,11 @@ class SaleOrder(models.Model):
 
     @api.model
     def create(self, values):        
-        currentMonth = str(datetime.now().month).zfill(2)
+        #currentMonth = str(datetime.now().month).zfill(2)
         # values.update({'month_promotion':currentMonth})
         print(values)
         result = super().create(values)
+        result.quotation_action_confirm()
         result.order_line.check_price_not_in_zero()
         return result
     
@@ -105,13 +106,23 @@ class SaleOrder(models.Model):
                 print('pasa')         
               
 
-            if order.partner_credit_amount_overdue <= 0.0 and self.approve_state not in ['confirm'] and self.payment_term_days == 0.0:
-                if self.approve_state in [False]:
+            # if order.partner_credit_amount_overdue <= 0.0 and self.approve_state not in ['confirm'] and self.payment_term_days == 0.0:
+            #     if self.approve_state in [False]:
+            #         raise UserError('Nececita la aprobación del Gerente de Ventas.')  
+            #     else:    
+            #         raise UserError('Nececita indicar que el pago anticipado fue realizado para compras de contado.')  
+            # if self.approve_state in ['confirm'] and self.payment_term_days == 0.0:
+            #     return False
+            
+            #####Logica con odoo studio
+            if order.partner_credit_amount_overdue <= 0.0 and (not self.x_studio_val_pago) and self.payment_term_days == 0.0:
+                if self.x_studio_val_ventas in [False]:
                     raise UserError('Nececita la aprobación del Gerente de Ventas.')  
                 else:    
                     raise UserError('Nececita indicar que el pago anticipado fue realizado para compras de contado.')  
-            if self.approve_state in ['confirm'] and self.payment_term_days == 0.0:
-                return False
+            if self.x_studio_val_pago and self.payment_term_days == 0.0:
+                return False    
+            #####            
             if not (order.partner_credit_amount_overdue  <= 0.0 ):
                 return {
                     'type': 'ir.actions.act_window',
@@ -129,10 +140,10 @@ class SaleOrder(models.Model):
                     'view_mode': 'form',                    
                     'target': 'new'
                 }  
-                if order.partner_credit_limit_used > order.partner_credit_limit:
+                if order.partner_credit_limit_used == 0 and  order.partner_credit_limit == 0 and self.payment_term_days >0:
                     return {
                     'type': 'ir.actions.act_window',
-                    'name': 'La cantidad de crédito usado es mayor a la cantidad de límite de crédito',
+                    'name': 'El Cliente Necesita tener crédito para compras que no son de pago inmediato.',
                     'res_model': 'ztyres.wizard_denied_confirm_sale',
                     'view_mode': 'form',                    
                     'target': 'new'

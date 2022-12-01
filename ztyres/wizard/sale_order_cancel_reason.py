@@ -20,6 +20,6 @@ class Sale(models.TransientModel):
             sale.message_post(body=body)
             sale.sale_reason_cancel_id=[(6,0,self.cancel_reason.ids)]
             sale._action_cancel_delete_picking_ids()
-            sale.approve_state=False
+            #sale.approve_state=False
 
 

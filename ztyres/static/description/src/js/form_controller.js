@@ -39,7 +39,7 @@ odoo.define('ztyres.action_button', function (require) {
 
 						
 						this.$buttons.find('button.fa-check-circle-o').on('click', function (e) {
-							e.preventDefault();
+							e.preventDefault();k
 							// self.$buttons.find('button.fa-upload').hide();
 							console.log("Click")
 							console.log(this)
