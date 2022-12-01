@@ -63,9 +63,9 @@ class SaleOrder(models.Model):
                 self.action_unlock()
             if self.state == 'draft':
                 self.quotation_action_confirm()
-                ##res = self._ztyres_check_account_status()
-                ##if res:                
-                ##    return res                          
+                res = self._ztyres_check_account_status()
+                if res:                
+                   return res                          
             if self.state == 'sale':
                 self.action_done()                  
         return res
@@ -101,6 +101,7 @@ class SaleOrder(models.Model):
         return (unpaid_invoices,balance_for_followup)
     
     def _ztyres_check_account_status(self):
+        return False
         for order in self:
             if order.partner_credit_amount_overdue <=0.0:
                 print('pasa')         

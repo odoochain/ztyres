@@ -43,7 +43,7 @@
         'security/ir.model.access.csv',
         'views/account_move.xml',
         'views/account_views.xml',
-        'views/res_partner_views.xml',
+        #'views/res_partner_views.xml',
         'views/sale_order_report.xml',
         'views/sale_views.xml',
         'views/stock_production_lot_views.xml',
