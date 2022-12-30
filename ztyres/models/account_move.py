@@ -32,10 +32,10 @@ class AccountMove(models.Model):
                        len(move.invoice_payment_term_id.line_ids) > 1:  # to be able to force PPD
                         move.l10n_mx_edi_payment_policy = 'PPD'
                     else:
-                        move.l10n_mx_edi_payment_policy = 'PUE'                
+                        move.l10n_mx_edi_payment_policy = 'PPD'                
                 else:
-                    move.l10n_mx_edi_payment_policy = 'PUE'
+                    move.l10n_mx_edi_payment_policy = 'PPD'
             elif move.move_type == 'out_refund':
-                move.l10n_mx_edi_payment_policy = 'PUE'
+                move.l10n_mx_edi_payment_policy = 'PPD'
             else:
                 move.l10n_mx_edi_payment_policy = 'PPD'
