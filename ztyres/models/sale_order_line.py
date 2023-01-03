@@ -1,4 +1,20 @@
 # -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
+# Part of Odoo. See LICENSE file for full copyright and licensing details.
+
+from datetime import datetime, timedelta
+from functools import partial
+from itertools import groupby
+
+from odoo import api, fields, models, SUPERUSER_ID, _
+from odoo.exceptions import AccessError, UserError, ValidationError
+from odoo.tools.misc import formatLang, get_lang
+from odoo.osv import expression
+from odoo.tools import float_is_zero, float_compare
+
+
+
+from werkzeug.urls import url_encode
 from odoo import models, fields,api, _
 from odoo.tools import  float_compare
 from odoo.exceptions import UserError
@@ -11,6 +27,48 @@ class SaleOrderLine(models.Model):
     # promotion_applied = fields.Many2many('ztyres.sale_promotion_line', string='Promoción aplicada')
     
     
+
+    
+    def get_low_price(self):
+        pricelist_item = self.env['product.pricelist.item']
+        low_price = 0
+        for line in self:
+            print(line.product_id.product_tmpl_id.ids)
+            pricelist_items = pricelist_item.search([('product_tmpl_id','in',line.product_id.product_tmpl_id.ids),('pricelist_id.active','in',[True])],order="fixed_price asc",limit=1)
+            for product in pricelist_items:
+                print(product.fixed_price,product.pricelist_id.name)
+            if pricelist_items:
+                low_price = pricelist_items.fixed_price
+                line.price_unit = pricelist_items.fixed_price
+        return low_price  
+    
+    @api.onchange('product_uom', 'product_uom_qty')
+    def product_uom_change(self):
+        if not self.product_uom or not self.product_id:
+            self.price_unit = 0.0
+            return
+        if self.order_id.pricelist_id and self.order_id.partner_id:
+            product = self.product_id.with_context(
+                lang=self.order_id.partner_id.lang,
+                partner=self.order_id.partner_id,
+                quantity=self.product_uom_qty,
+                date=self.order_id.date_order,
+                pricelist=self.order_id.pricelist_id.id,
+                uom=self.product_uom.id,
+                fiscal_position=self.env.context.get('fiscal_position')
+            )
+            self.price_unit = product._get_tax_included_unit_price(
+                self.company_id,
+                self.order_id.currency_id,
+                self.order_id.date_order,
+                'sale',
+                fiscal_position=self.order_id.fiscal_position_id,
+                product_price_unit= self.get_low_price(),#self._get_display_price(product),
+                product_currency=self.order_id.currency_id
+            )     
+        print(product)
+
+
 
     
     def check_price_not_in_zero(self):
