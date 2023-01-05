@@ -19,6 +19,14 @@
         <record id="group_merge_sale" model="res.groups">
             <field name="name">Unificar Cotizaciones de Venta</field>
             <field name="category_id" ref="account_changes" />
+        </record>        
+        <record id="group_pricelist_export" model="res.groups">
+            <field name="name">Expotacion de Lista de Precios</field>
+            <field name="category_id" ref="account_changes" />
+        </record>
+        <record id="group_pricelist_import" model="res.groups">
+            <field name="name">Improtación de Lista de Precios</field>
+            <field name="category_id" ref="account_changes" />
         </record>
         <!-- <record id="group_manufacturer" model="res.groups">
             <field name="name">Administración de fabicantes</field>
