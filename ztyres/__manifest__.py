@@ -59,7 +59,9 @@
         # 'wizard/update_pricelist_confirm_import.xml',
         'views/stock_valuation_layer_resume_history_views.xml',
         'views/stock_valuation_layer_resume_line_views.xml',
-        'views/product_template_views.xml'
+        'views/product_template_views.xml',
+        'wizard/price_list_export_wizard.xml',
+        'wizard/pricelist_import_wizard.xml'
         
 
     ],
