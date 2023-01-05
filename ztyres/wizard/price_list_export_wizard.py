@@ -72,8 +72,8 @@ class PriceListExportWizard(models.TransientModel):
                             })
                         # if self.include_dot:
                         #     record.update({'09 Dot' : product.product_tmpl_id.product_variant_id.dot_range or not_defined})
-                         
-                data.append(dict(sorted(record.items())))                        
+                if record:
+                    data.append(dict(sorted(record.items())))                        
                                         
         df = pd.DataFrame(data)
         fp = io.BytesIO()
@@ -85,7 +85,7 @@ class PriceListExportWizard(models.TransientModel):
         action = {
             'name': 'Lista de Precios',
             'type': 'ir.actions.act_url',
-            'url': "/web/content/?model=ztyres.pricelist_export_wizard&id=" + str(self.id) + "&field=file_data&download=true&filename=Lista de Precios.xls",
+            'url': "/web/content/?model=ztyres.pricelist_export_wizard&id=" + str(self.id) + "&field=file_data&download=true&filename=Lista de Precios.xlsx",
             'target': 'self',
             }
         return action        
