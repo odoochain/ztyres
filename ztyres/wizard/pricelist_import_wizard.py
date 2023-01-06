@@ -24,19 +24,19 @@ class ImportCustomerWizard(models.TransientModel):
             wb = openpyxl.load_workbook(filename=BytesIO(base64.b64decode(self.file)), read_only=True)
             ws = wb.active
             records_modified = False
-            for record in ws.iter_rows(min_row=2, max_row=None, min_col=None,max_col=None, values_only=True):     
+            for record in ws.iter_rows(min_row=2, max_row=None, min_col=None,max_col=None, values_only=True):
                #TODO Usar filtered para mejorar el performance
-                product = self.pricelist_ids.item_ids.search([('pricelist_id','in',[self.pricelist_ids.id]),('product_tmpl_id','in',[record[0]])])
+                product = self.pricelist_ids.item_ids.search([('pricelist_id','in',[self.pricelist_ids.id]),('product_tmpl_id','in',[int(record[0])])])
                 if product:
-                    product.fixed_price = record[1]  
+                    product.fixed_price = float(record[1])   
                     records_modified = True                  
                 else:    
                     self.pricelist_ids.item_ids.create({
                     "applied_on": "1_product",
-                    "product_tmpl_id": record[0],
+                    "product_tmpl_id": int(record[0]),
                     "pricelist_id": self.pricelist_ids.id,
                     "compute_price": "fixed",
-                    "fixed_price":record[1] ,
+                    "fixed_price":float(record[1]) ,
                     })
                     records_modified = True
             if records_modified:
