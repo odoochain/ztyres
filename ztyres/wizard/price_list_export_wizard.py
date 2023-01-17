@@ -43,7 +43,7 @@ class PriceListExportWizard(models.TransientModel):
                 record = {}
                 for product in product_list:                    
                     if self.only_on_hand:
-                        if product.product_tmpl_id.qty_available:
+                        if product.product_tmpl_id.virtual_available:
                             record.update(                                {   
                              '01 Código':product.product_tmpl_id.default_code or not_defined,                     
                              '02 Nombre' : product.product_tmpl_id.name or not_defined,
@@ -51,7 +51,7 @@ class PriceListExportWizard(models.TransientModel):
                              '04 Marca':product.product_tmpl_id.x_studio_marca or not_defined,
                              '05 Indice de Carga':product.product_tmpl_id.x_studio_indice_carga or not_defined,
                              '06 Uso':product.product_tmpl_id.x_studio_uso or not_defined,                                  
-                             '07 Disponible':product.product_tmpl_id.qty_available or not_defined,
+                             '07 Disponible':product.product_tmpl_id.virtual_available or not_defined,
                              '08 '+product.pricelist_id.name : self.tax_ids.compute_all(product.fixed_price,self.env.company.currency_id,1.0,None,None,False,True)['total_included'] or not_defined,
                             #  '09 Dot' : product.product_tmpl_id.product_variant_id.dot_range or not_defined                              
                             })
@@ -66,7 +66,7 @@ class PriceListExportWizard(models.TransientModel):
                              '04 Marca':product.product_tmpl_id.x_studio_marca or not_defined,
                              '05 Indice de Carga':product.product_tmpl_id.x_studio_indice_carga or not_defined,
                              '06 Uso':product.product_tmpl_id.x_studio_uso or not_defined,                                  
-                             '07 Disponible':product.product_tmpl_id.qty_available or not_defined,
+                             '07 Disponible':product.product_tmpl_id.virtual_available or not_defined,
                              '08 '+product.pricelist_id.name : self.tax_ids.compute_all(product.fixed_price,self.env.company.currency_id,1.0,None,None,False,True)['total_included'] or not_defined,
                             #  '09 Dot' : product.product_tmpl_id.product_variant_id.dot_range or not_defined
                             })
