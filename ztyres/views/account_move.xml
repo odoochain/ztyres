@@ -22,7 +22,7 @@
     </record>
 
 
-    <record id="l10n_mx_edi_form_ro" model="ir.ui.view">
+    <!-- <record id="l10n_mx_edi_form_ro" model="ir.ui.view">
         <field name="name">l10n_mx_edi.form</field>
         <field name="model">account.move</field>
         <field name="inherit_id" ref="l10n_mx_edi.view_l10n_mx_edi_invoice_form_inherit" />
@@ -34,9 +34,9 @@
                 <attribute name="readonly">True</attribute>                                              
             </field>
         </field>
-    </record>
+    </record> -->
 
-    <record id="l10n_mx_edi_form" model="ir.ui.view">
+    <!-- <record id="l10n_mx_edi_form" model="ir.ui.view">
         <field name="name">l10n_mx_edi.form</field>
         <field name="model">account.move</field>
         <field name="inherit_id" ref="l10n_mx_edi.view_l10n_mx_edi_invoice_form_inherit" />
@@ -49,6 +49,6 @@
                 <attribute name="readonly">False</attribute>                                              
             </field>
         </field>
-    </record> 
+    </record>  -->
     
 </odoo>

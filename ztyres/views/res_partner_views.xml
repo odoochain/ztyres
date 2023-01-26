@@ -72,10 +72,10 @@
                 <xpath expr='//label[2]' position="attributes">
                     <attribute name="string">Número Secundario</attribute>
                 </xpath>
-                <field name='l10n_mx_edi_colony' position='attributes'>
+                <!-- <field name='l10n_mx_edi_colony' position='attributes'>
                     <attribute name="string">Colonia</attribute>
                     <attribute name="required">True</attribute>
-                </field>
+                </field> -->
                 <field name='country_id' position='attributes'>
                     <attribute name="required">True</attribute>
                 </field>
