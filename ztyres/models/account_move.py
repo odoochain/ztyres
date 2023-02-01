@@ -23,7 +23,7 @@ class AccountMove(models.Model):
     def _compute_l10n_mx_edi_payment_policy(self):     
         for move in self:             
             if move.move_type == 'out_invoice':
-                if move.invoice_payment_term_id.line_ids.mapped('days') > 0:
+                if sum(move.invoice_payment_term_id.line_ids.mapped('days')) > 0:
                     move.l10n_mx_edi_payment_policy = 'PPD'
                 else:
                     move.l10n_mx_edi_payment_policy = 'PUE'
