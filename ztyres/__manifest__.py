@@ -38,10 +38,8 @@
 
     # always loaded
     'data': [
-        # 'data/stock.production.lot.week.csv',
-        # 'data/stock.production.lot.year.csv',
-        'security/security.xml',
-        'security/ir.model.access.csv',
+        # 'security/security.xml',
+        # 'security/ir.model.access.csv',
         'views/account_move.xml',
         'views/account_views.xml',
         #'views/res_partner_views.xml',

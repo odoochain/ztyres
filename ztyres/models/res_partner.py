@@ -15,47 +15,16 @@ class ResPartner(models.Model):
 
     def _compute_credt_limit_used(self):
         for partner in self:
-            res = partner._ztyres_compute_for_followup()
-            partner.credt_limit_used = res['total_due']
-            partner.credit_amount_overdue = res['total_overdue']
+            
+            partner.credt_limit_used =0
+            partner.credit_amount_overdue = 0
 
     def _compute_credt_limit_available(self):
         for partner in self:
             partner.credt_limit_available = (partner.credit_limit-partner.credt_limit_used) if (partner.credit_limit-partner.credt_limit_used)>=1 else 0
             print(partner.credt_limit_available)
     
-    def _ztyres_compute_for_followup(self):
-        """
-        Compute the fields 'total_due', 'total_overdue','followup_level' and 'followup_status'
-        """
-        res = {
-            'total_due':0,
-            'total_overdue':0,
-            'followup_level':0,
-            'followup_status':0,                    
-        }
-        first_followup_level = self.env['account_followup.followup.line'].search([('company_id', '=', self.env.company.id)], order="delay asc", limit=1)
-        followup_data = self._query_followup_level()
-        today = fields.Date.context_today(self)
-        for record in self:
-            total_due = 0
-            total_overdue = 0
-            for aml in record.unreconciled_aml_ids:
-                if aml.company_id == self.env.company and not aml.blocked:
-                    amount = aml.amount_residual
-                    total_due += amount
-                    is_overdue = today > aml.date_maturity if aml.date_maturity else today > aml.date
-                    if is_overdue:
-                        total_overdue += amount
-            res.update({'total_due': total_due})
-            res.update({'total_overdue': total_overdue})
-            if record.id in followup_data:
-                res.update({'followup_status': followup_data[record.id]['followup_status']})
-                res.update({'followup_level': self.env['account_followup.followup.line'].browse(followup_data[record.id]['followup_level']) or first_followup_level})                
-            else:
-                res.update({'followup_status': 'no_action_needed'})
-                res.update({'followup_level': first_followup_level})  
-            return res              
+          
 
     def _ztyres_compute_unpaid_invoices(self):
         account_move = self.env['account.move']        
