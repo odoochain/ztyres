@@ -36,6 +36,6 @@ class AccountMove(models.Model):
                 else:
                     move.l10n_mx_edi_payment_policy = 'PPD'
             elif move.move_type == 'out_refund':
-                move.l10n_mx_edi_payment_policy = 'PPD'
+                move.l10n_mx_edi_payment_policy = 'PUE'
             else:
                 move.l10n_mx_edi_payment_policy = 'PPD'
