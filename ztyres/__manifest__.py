@@ -20,11 +20,10 @@
     # for the full list
     'category': 'Customizations',
     'version': '14.0.0.1',
-    'external_dependencies': {
-        'python': [
-
-        ],
-    },
+    'external_dependencies' : {
+        'python' : ['openpyxl'],
+    },    
+    
     # any module necessary for this one to work correctly
     # 'l10n_mx_edi'
     'depends': ['mail', 'stock', 'product', 'contacts', 'base', 'sale', 'sale_management', 'account'],
