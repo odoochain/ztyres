@@ -21,7 +21,7 @@
     'category': 'Customizations',
     'version': '14.0.0.1',
     'external_dependencies' : {
-        'python' : ['openpyxl'],
+        'python' : [],
     },    
     
     # any module necessary for this one to work correctly
@@ -59,7 +59,7 @@
         'views/stock_valuation_layer_resume_line_views.xml',
         'views/product_template_views.xml',
         'wizard/price_list_export_wizard.xml',
-        'wizard/pricelist_import_wizard.xml'
+        # 'wizard/pricelist_import_wizard.xml'
         
 
     ],

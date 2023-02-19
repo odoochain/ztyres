@@ -7,4 +7,4 @@ from . import sale_order_cancel_reason
 # from . import update_pricelist_import
 # from . import update_pricelist_confirm_import
 from . import price_list_export_wizard
-from . import pricelist_import_wizard
+# from . import pricelist_import_wizard
