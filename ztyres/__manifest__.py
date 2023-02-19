@@ -46,7 +46,7 @@
         'views/sale_views.xml',
         # 'views/stock_production_lot_views.xml',
         'wizard/denied_confirm_sale.xml',
-        'wizard/merge_quotations.xml',
+        # 'wizard/merge_quotations.xml',
         #'views/stock_picking_views.xml',
         # 'views/ztyres_sale_promotion_views.xml',
         # 'views/product_template_form_view.xml',

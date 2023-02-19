@@ -28,7 +28,7 @@
             </field>
         </record>
 
-        <record id="view_partner_form_inherit_vat" model="ir.ui.view">
+        <!-- <record id="view_partner_form_inherit_vat" model="ir.ui.view">
             <field name="name">model.name.view.form.inherit</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form" />
@@ -47,9 +47,9 @@
                     <field name="parent_id"/>
                 </field>
             </field>
-        </record>
+        </record> -->
 
-        <record id="view_partner_form_inherit_credit_limit" model="ir.ui.view">
+        <!-- <record id="view_partner_form_inherit_credit_limit" model="ir.ui.view">
             <field name="name">model.name.view.form.inherit</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form" />
@@ -59,9 +59,9 @@
                     <attribute name="readonly">False</attribute>                    
                 </field>
             </field>
-        </record>
+        </record> -->
 
-        <record id="view_partner_address_structured_form" model="ir.ui.view">
+        <!-- <record id="view_partner_address_structured_form" model="ir.ui.view">
             <field name="name">model.name.view.form.inherit</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="l10n_mx_edi.mx_partner_address_form" />
@@ -72,10 +72,6 @@
                 <xpath expr='//label[2]' position="attributes">
                     <attribute name="string">Número Secundario</attribute>
                 </xpath>
-                <!-- <field name='l10n_mx_edi_colony' position='attributes'>
-                    <attribute name="string">Colonia</attribute>
-                    <attribute name="required">True</attribute>
-                </field> -->
                 <field name='country_id' position='attributes'>
                     <attribute name="required">True</attribute>
                 </field>
@@ -88,7 +84,7 @@
                     <attribute name="options">{'no_quick_create': True,'no_create': True, 'no_create_edit': True}</attribute>
                 </field>
             </field>
-        </record>
+        </record> -->
 
     </data>
 </odoo>
